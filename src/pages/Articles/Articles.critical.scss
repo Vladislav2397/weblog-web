@@ -1,0 +1,17 @@
+.articles {
+    padding-top: 24px;
+
+    &__container {
+        padding: 0 16px;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 16px;
+    }
+
+    &__title {
+        margin-bottom: 24px;
+    }
+}

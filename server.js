@@ -81,9 +81,13 @@ if (isProd) {
 } else {
     // In development: setup the dev server with watch and hot-reload,
     // and create a new renderer on bundle / index template update.
-    readyPromise = require('./build/setup-dev-server')(app, templatePath, (bundle, options) => {
-        renderer = createRenderer(bundle, options)
-    })
+    readyPromise = require('./build/setup-dev-server')(
+        app,
+        templatePath,
+        (bundle, options) => {
+            renderer = createRenderer(bundle, options)
+        },
+    )
 }
 
 const serve = (dir, cache) =>
@@ -105,7 +109,9 @@ function detectIeByUserAgent(userAgent) {
 
     return (
         lowerCase.indexOf('trident') !== -1 ||
-        (lowerCase.indexOf('msie') !== -1 ? parseInt(lowerCase.split('msie')[1], 10) : false)
+        (lowerCase.indexOf('msie') !== -1
+            ? parseInt(lowerCase.split('msie')[1], 10)
+            : false)
     )
 }
 
@@ -146,7 +152,11 @@ function render(req, res) {
         if (err.url) {
             res.redirect(err.url)
         } else if (err.code === 404) {
-            res.status(404).sendFile(path.join(__dirname + '/content/404' + context.language + '.html'))
+            res.status(404).sendFile(
+                path.join(
+                    __dirname + '/content/404' + context.language + '.html',
+                ),
+            )
         } else {
             res.status(500).send('500 | Internal Server Error')
             console.error(`error during render : ${req.url}`)

@@ -10,6 +10,8 @@ import App from './App.vue'
 import createRouter from './providers/router'
 import createStore from './providers/store'
 
+import '../server'
+
 const scrollLock = () =>
     import(
         /* webpackChunkName: "chunks/utils/scroll-lock" */

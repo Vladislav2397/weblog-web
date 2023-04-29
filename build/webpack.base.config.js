@@ -6,6 +6,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 const TerserPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
+
 const isProd = process.env.NODE_ENV === 'production'
 const ESLintPlugin = require('eslint-webpack-plugin')
 
@@ -25,7 +26,7 @@ if (isProd) {
             extensions: ['.vue', '.ts', 'tsx', 'js', 'jsx'],
         }),
         new StyleLintPlugin({
-            files: ['**/*.{vue,htm,html,sss,less,scss,sass}'],
+            files: ['**/*.{css,scss,sass}'],
             fix: true,
         }),
     )
@@ -85,7 +86,8 @@ module.exports = {
             },
             {
                 test: /\.(jsx?|tsx?)$/,
-                exclude: /node_modules\/(?!(twig|twig-drupal-filters|lit-html|lit-element)\/).*/,
+                exclude:
+                    /node_modules\/(?!(twig|twig-drupal-filters|lit-html|lit-element)\/).*/,
                 use: [
                     'babel-loader',
                     {

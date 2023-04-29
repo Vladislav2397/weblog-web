@@ -10,19 +10,20 @@ function createDecoratorFactory(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mapFn: any,
 ) {
-    return (storeKey: string) => createDecorator((options, key) => {
-        const mapObject = { [key]: storeKey }
+    return (storeKey: string) =>
+        createDecorator((options, key) => {
+            const mapObject = { [key]: storeKey }
 
-        if (typeof options[optionsKey] === 'undefined') {
+            if (typeof options[optionsKey] === 'undefined') {
+                // eslint-disable-next-line no-param-reassign
+                options[optionsKey] = {}
+            }
+
+            if (typeof options[optionsKey]![key] !== 'undefined') {
+                return
+            }
+
             // eslint-disable-next-line no-param-reassign
-            options[optionsKey] = {}
-        }
-
-        if (typeof options[optionsKey]![key] !== 'undefined') {
-            return
-        }
-
-        // eslint-disable-next-line no-param-reassign
-        options[optionsKey]![key] = mapFn(mapObject)[key]
-    })
+            options[optionsKey]![key] = mapFn(mapObject)[key]
+        })
 }

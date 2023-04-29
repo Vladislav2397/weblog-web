@@ -4,7 +4,6 @@ import routes from './routes'
 
 Vue.use(Router)
 
-
 const router: Router = new Router({
     mode: 'history',
     fallback: false,

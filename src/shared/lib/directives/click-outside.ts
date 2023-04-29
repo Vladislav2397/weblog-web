@@ -1,6 +1,10 @@
 function validate(binding) {
     if (typeof binding.value !== 'function') {
-        console.warn('[Vue-click-outside:] provided expression', binding.expression, 'is not a function.')
+        console.warn(
+            '[Vue-click-outside:] provided expression',
+            binding.expression,
+            'is not a function.',
+        )
         return false
     }
 
@@ -27,7 +31,10 @@ function isPopup(popupItem, elements) {
 }
 
 function isServer(vNode) {
-    return typeof vNode.componentInstance !== 'undefined' && vNode.componentInstance.$isServer
+    return (
+        typeof vNode.componentInstance !== 'undefined' &&
+        vNode.componentInstance.$isServer
+    )
 }
 /* eslint-disable */
 
@@ -43,7 +50,11 @@ export default {
             const elements = e.path || (e.composedPath && e.composedPath())
             elements && elements.length > 0 && elements.unshift(e.target)
 
-            if (el.contains(e.target) || isPopup(vNode.context.popupItem, elements)) return
+            if (
+                el.contains(e.target) ||
+                isPopup(vNode.context.popupItem, elements)
+            )
+                return
 
             el.__vueClickOutside__.callback(e)
         }
@@ -53,7 +64,8 @@ export default {
             handler,
             callback: binding.value,
         }
-        const clickHandler = 'ontouchstart' in document.documentElement ? 'touchstart' : 'click'
+        const clickHandler =
+            'ontouchstart' in document.documentElement ? 'touchstart' : 'click'
         !isServer(vNode) && document.addEventListener(clickHandler, handler)
     },
 
@@ -63,8 +75,14 @@ export default {
 
     unbind(el, binding, vNode) {
         // Remove Event Listeners
-        const clickHandler = 'ontouchstart' in document.documentElement ? 'touchstart' : 'click'
-        !isServer(vNode) && el.__vueClickOutside__ && document.removeEventListener(clickHandler, el.__vueClickOutside__.handler)
+        const clickHandler =
+            'ontouchstart' in document.documentElement ? 'touchstart' : 'click'
+        !isServer(vNode) &&
+            el.__vueClickOutside__ &&
+            document.removeEventListener(
+                clickHandler,
+                el.__vueClickOutside__.handler,
+            )
         delete el.__vueClickOutside__
     },
 }

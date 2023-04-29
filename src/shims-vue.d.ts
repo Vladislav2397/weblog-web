@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import type { DeviceProviderValue } from "@/shared/lib/providers/device"
+import type { DeviceProviderValue } from '@/shared/lib/providers/device'
 
 declare module '*.vue' {
     // @ts-ignore

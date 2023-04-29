@@ -5,7 +5,10 @@ const props = { functional: true } as Node
 /* eslint-disable */
 export const VueFunctional = Vue.extend(props)
 
-export function Functional<Props>(renderFn: (h: CreateElement, context: RenderContext<Props>) => VNode, inject?: string[]): any {
+export function Functional<Props>(
+    renderFn: (h: CreateElement, context: RenderContext<Props>) => VNode,
+    inject?: string[],
+): any {
     return {
         functional: true,
         inject: ['$device', ...(inject ?? [])],

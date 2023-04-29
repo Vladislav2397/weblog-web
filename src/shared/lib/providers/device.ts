@@ -1,18 +1,18 @@
-import {Component, Mixins, Provide} from 'vue-property-decorator'
-import Resize from "@/shared/lib/mixins/utility/resize";
-import {getDeviceBreakpoints} from "@/shared/lib/utils/other/getDeviceBreakpoints";
+import { Component, Mixins, Provide } from 'vue-property-decorator'
+import Resize from '@/shared/lib/mixins/utility/resize'
+import { getDeviceBreakpoints } from '@/shared/lib/utils/other/getDeviceBreakpoints'
 
 export type DeviceProviderValue = {
     size: {
-        maxMobile: boolean,
-        maxMobileLate: boolean,
-        maxTablet: boolean,
-        tablet: boolean,
-        tabletLate: boolean,
+        maxMobile: boolean
+        maxMobileLate: boolean
+        maxTablet: boolean
+        tablet: boolean
+        tabletLate: boolean
         desktop: boolean
-    },
+    }
     type: {
-        desktop: boolean,
+        desktop: boolean
         mobile: boolean
     }
 }
@@ -26,33 +26,37 @@ export default class DeviceProvider extends Mixins(Resize) {
             maxTablet: false,
             tablet: false,
             tabletLate: false,
-            desktop: false
+            desktop: false,
         },
         type: {
             desktop: false,
-            mobile: false
-        }
+            mobile: false,
+        },
     }
 
-    isMobile (): boolean {
-        return Boolean(navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i))
+    isMobile(): boolean {
+        return Boolean(
+            navigator.userAgent.match(
+                /(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i,
+            ),
+        )
     }
 
-    mounted (): void {
+    mounted(): void {
         this.setSize()
         this.setType()
         this.addResizeWidthEvent(this.setSize)
     }
 
-    beforeDestroy (): void {
+    beforeDestroy(): void {
         this.removeResizeWidthEvent()
     }
 
-    setSize (): void {
+    setSize(): void {
         this.device.size = getDeviceBreakpoints()
     }
 
-    setType (): void {
+    setType(): void {
         this.device.type.desktop = !this.isMobile()
         this.device.type.mobile = this.isMobile()
     }

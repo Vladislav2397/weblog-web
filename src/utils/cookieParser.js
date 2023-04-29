@@ -23,11 +23,11 @@ export const cookieParser = cookie => {
         const match = item.match(/(?<key>.+)=(?<value>.+)/)
 
         if (match?.groups) {
-            const {key, value} = match.groups
+            const { key, value } = match.groups
 
             obj[key] = value
         }
     })
 
-    return {obj, getCookieString}
+    return { obj, getCookieString }
 }

@@ -1,6 +1,6 @@
-import {Component, Inject, Ref, Vue} from 'vue-property-decorator'
-import {DeviceProviderValue} from '@/shared/lib/providers/device'
-import {Maybe} from '@/shared/types/helpers'
+import { Component, Inject, Ref, Vue } from 'vue-property-decorator'
+import { DeviceProviderValue } from '@/shared/lib/providers/device'
+import { Maybe } from '@/shared/types/helpers'
 
 @Component
 export default class FormMixin extends Vue {

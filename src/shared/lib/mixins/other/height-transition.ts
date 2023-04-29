@@ -1,5 +1,5 @@
-import {Component, Vue, Ref, VModel, Watch} from 'vue-property-decorator'
-import {Maybe} from '../../../types/helpers'
+import { Component, Vue, Ref, VModel, Watch } from 'vue-property-decorator'
+import { Maybe } from '../../../types/helpers'
 
 @Component
 export default class HeightTransition extends Vue {
@@ -36,15 +36,23 @@ export default class HeightTransition extends Vue {
     animateHeight(): void {
         clearTimeout(this.animationTimeout)
         this.isTransition = true
-        this.setStyle('transition', `max-height ${this.animationDuration}ms ease`)
+        this.setStyle(
+            'transition',
+            `max-height ${this.animationDuration}ms ease`,
+        )
 
-        const height = `${this.contentRef ? this.contentRef.getBoundingClientRect().height : 0}px`
+        const height = `${
+            this.contentRef ? this.contentRef.getBoundingClientRect().height : 0
+        }px`
 
         this.$nextTick(() => {
             this.setStyle('maxHeight', height)
             if (this.isShowSlot) {
                 requestAnimationFrame(() => {
-                    this.setStyle('maxHeight', `${this.contentRef.getBoundingClientRect().height}px`)
+                    this.setStyle(
+                        'maxHeight',
+                        `${this.contentRef.getBoundingClientRect().height}px`,
+                    )
                 })
             } else {
                 requestAnimationFrame(() => {

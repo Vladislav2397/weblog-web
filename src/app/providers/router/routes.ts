@@ -8,9 +8,19 @@ const routes: RouteConfig[] = [
         component: Home,
     },
     {
+        path: '/articles',
+        name: 'Articles',
+        component: () => import('@/pages/Articles/Articles.vue'),
+    },
+    {
+        path: '/articles/:id',
+        name: 'Article',
+        component: () => import('@/pages/Article/Article.vue'),
+    },
+    {
         path: 'not-found',
         name: 'not-found',
-        component: () => import('@/pages/NotFound/NotFound.vue')
+        component: () => import('@/pages/NotFound/NotFound.vue'),
     },
     {
         path: '*',
@@ -18,6 +28,4 @@ const routes: RouteConfig[] = [
     },
 ]
 
-
 export default routes
-

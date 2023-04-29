@@ -1,4 +1,4 @@
-import {Component, Provide, Vue} from 'vue-property-decorator'
+import { Component, Provide, Vue } from 'vue-property-decorator'
 
 import { detectIE } from '@/shared/lib/utils/other/detectIE'
 import { detectFirefox } from '@/shared/lib/utils/other/detectFirefox'

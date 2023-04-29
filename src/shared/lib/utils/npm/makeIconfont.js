@@ -1,9 +1,7 @@
 const fs = require('fs')
 const crypto = require('crypto')
-const { optimize } = require('svgo');
+const { optimize } = require('svgo')
 const webfont = require('webfont').default
-
-
 
 const fontPath = './public/fonts/icons/'
 const srcPath = './src/shared/assets/icons/template/'
@@ -17,10 +15,10 @@ const generateChecksum = function (str, algorithm, encoding) {
         .digest(encoding || 'hex')
 }
 
-function optimizeIcons(){
+function optimizeIcons() {
     fs.readdir(iconsFolder, (error, files) => {
         files.forEach(fileName => {
-            if(~fileName.indexOf('.svg')) {
+            if (~fileName.indexOf('.svg')) {
                 const filePath = `${iconsFolder}/${fileName}`
                 const file = fs.readFileSync(`${iconsFolder}/${fileName}`)
                 const { data } = optimize(file, {
@@ -32,7 +30,7 @@ function optimizeIcons(){
                                 overrides: {
                                     // customize default plugin options
                                     removeAttrs: {
-                                        attrs: ['version', 'id', 'x', 'y']
+                                        attrs: ['version', 'id', 'x', 'y'],
                                     },
                                     inlineStyles: {
                                         onlyMatchedOnce: false,
@@ -40,14 +38,13 @@ function optimizeIcons(){
                                 },
                             },
                         },
-
                     ],
                     multipass: true,
                     // js2svg: {
                     //     indent: 4, // string with spaces or number of spaces. 4 by default
                     //     pretty: true, // boolean, false by default
                     // },
-                });
+                })
                 fs.writeFile(filePath, data, error => {})
             }
         })
@@ -57,7 +54,9 @@ function optimizeIcons(){
 const makeIconfont = function () {
     let existingSelection = null
     if (fs.existsSync(`${srcPath}selection.json`)) {
-        existingSelection = JSON.parse(fs.readFileSync(`${srcPath}selection.json`, 'utf8'))
+        existingSelection = JSON.parse(
+            fs.readFileSync(`${srcPath}selection.json`, 'utf8'),
+        )
     }
 
     const selection = {
@@ -80,7 +79,6 @@ const makeIconfont = function () {
 
             icon.checksum = generateChecksum(file)
 
-
             if (
                 existingSelection &&
                 existingSelection.icons.length > counter &&
@@ -88,13 +86,23 @@ const makeIconfont = function () {
             ) {
                 console.log(`Иконка ${obj.name} уже добавлена`)
             } else if (existingSelection) {
-                const sameIcon = existingSelection.icons.find(el => el.checksum === icon.checksum)
+                const sameIcon = existingSelection.icons.find(
+                    el => el.checksum === icon.checksum,
+                )
                 if (typeof sameIcon !== 'undefined') {
-                    const filename = obj.path.replace(/^.*[\\\/]/, '').split('-')
-                    const path = `${obj.path.substring(0, obj.path.lastIndexOf('/'))}/`
+                    const filename = obj.path
+                        .replace(/^.*[\\\/]/, '')
+                        .split('-')
+                    const path = `${obj.path.substring(
+                        0,
+                        obj.path.lastIndexOf('/'),
+                    )}/`
                     fs.renameSync(
                         `${path}${filename[0]}-${filename[1]}`,
-                        `${path}u${sameIcon.unicode[0].charCodeAt(0).toString(16).toUpperCase()}-${filename[1]}`,
+                        `${path}u${sameIcon.unicode[0]
+                            .charCodeAt(0)
+                            .toString(16)
+                            .toUpperCase()}-${filename[1]}`,
                     )
                 }
             }
@@ -109,7 +117,10 @@ const makeIconfont = function () {
     })
         .then(result => {
             fs.writeFileSync(`${srcPath}demo.html`, result.template)
-            fs.writeFileSync(`${srcPath}selection.json`, JSON.stringify(selection))
+            fs.writeFileSync(
+                `${srcPath}selection.json`,
+                JSON.stringify(selection),
+            )
             fs.writeFileSync(`${fontPath}iconfont.woff`, result.woff)
             fs.writeFileSync(`${fontPath}iconfont.woff2`, result.woff2)
             return result

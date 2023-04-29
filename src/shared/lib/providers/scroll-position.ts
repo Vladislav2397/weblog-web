@@ -1,4 +1,4 @@
-import {Component, Provide, Vue} from 'vue-property-decorator'
+import { Component, Provide, Vue } from 'vue-property-decorator'
 
 export type ScrollPositionProviderValue = {
     position: number
@@ -7,7 +7,7 @@ export type ScrollPositionProviderValue = {
 @Component
 export default class ProviderScrollPosition extends Vue {
     @Provide('$scroll') scroll: ScrollPositionProviderValue = {
-        position: 0
+        position: 0,
     }
 
     onScroll() {
@@ -15,12 +15,10 @@ export default class ProviderScrollPosition extends Vue {
     }
 
     beforeMount() {
-        window.addEventListener('scroll', this.onScroll, {passive: true})
+        window.addEventListener('scroll', this.onScroll, { passive: true })
     }
 
     beforeDestroy() {
         window.removeEventListener('scroll', this.onScroll)
     }
 }
-
-

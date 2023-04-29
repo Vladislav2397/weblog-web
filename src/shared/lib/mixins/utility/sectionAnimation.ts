@@ -1,11 +1,11 @@
-import {Component, Inject, Vue, Watch} from 'vue-property-decorator'
-import {ScrollPositionProviderValue} from "@/shared/lib/providers/scroll-position";
-import isAnyElementInViewport from "@/shared/lib/utils/other/isAnyElementInViewport";
-import {Maybe} from "@/shared/types/helpers";
+import { Component, Inject, Vue, Watch } from 'vue-property-decorator'
+import { ScrollPositionProviderValue } from '@/shared/lib/providers/scroll-position'
+import isAnyElementInViewport from '@/shared/lib/utils/other/isAnyElementInViewport'
+import { Maybe } from '@/shared/types/helpers'
 import { BrowserProviderValue } from '@/shared/lib/providers/browsers'
 
 export type AnimationState = {
-    ready: boolean,
+    ready: boolean
     complete: boolean
 }
 
@@ -17,7 +17,7 @@ export default class SectionAnimation extends Vue {
 
     animation: AnimationState = {
         ready: false,
-        complete: false
+        complete: false,
     }
 
     animationContainer: Maybe<HTMLElement> = null
@@ -25,7 +25,11 @@ export default class SectionAnimation extends Vue {
     timeout = {} as ReturnType<typeof setTimeout>
 
     startAnimation() {
-        if (this.animation.ready && this.animationContainer && isAnyElementInViewport(this.animationContainer)) {
+        if (
+            this.animation.ready &&
+            this.animationContainer &&
+            isAnyElementInViewport(this.animationContainer)
+        ) {
             if (this.$vnode.componentOptions?.tag) {
                 completeSections.push(this.$vnode.componentOptions?.tag)
             }
@@ -40,22 +44,26 @@ export default class SectionAnimation extends Vue {
     }
 
     setAnimationContainer() {
-        this.animationContainer = (this.$el.querySelector('.animation-container') || this.$el)  as HTMLElement
+        this.animationContainer = (this.$el.querySelector(
+            '.animation-container',
+        ) || this.$el) as HTMLElement
     }
 
     get animationTime(): number {
         throw new Error('you need implement animation time')
-
     }
 
     get isAnimationComplete(): boolean {
-        return Boolean((this.$vnode.componentOptions?.tag && !completeSections.includes(this.$vnode.componentOptions.tag)))
+        return Boolean(
+            this.$vnode.componentOptions?.tag &&
+                !completeSections.includes(this.$vnode.componentOptions.tag),
+        )
     }
 
     get animationClasses() {
         return {
             'animation-ready': this.animation.ready,
-            'animation-complete': this.animation.complete
+            'animation-complete': this.animation.complete,
         }
     }
 

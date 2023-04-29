@@ -13,16 +13,14 @@ export default class MetaTitle extends Vue {
     meta: Meta = {
         title: '',
         description: '',
-        shareImage: ''
+        shareImage: '',
     }
 
     getBrowser(vm: Vue): boolean {
         // @ts-ignore
         const { browser } = vm.$options
         if (browser) {
-            return typeof browser === 'function'
-                ? browser.call(vm)
-                : browser
+            return typeof browser === 'function' ? browser.call(vm) : browser
         }
         return false
     }
@@ -48,25 +46,52 @@ export default class MetaTitle extends Vue {
                 this.$ssrContext.shareImage = `${shareImage}`
             }
         } else {
-            const titleElement = document.querySelector('meta[property="og:title"]') as HTMLMetaElement
-            const descriptionNameElement = document.querySelector('meta[name="description"]') as HTMLMetaElement
-            const descriptionPropertyElement = document.querySelector('meta[property="og:description"]') as HTMLMetaElement
-            const imageLinkElement = document.querySelector('link[rel="image_src"]') as HTMLMetaElement
-            const imagePropertyElement = document.querySelector('meta[property="og:image"]') as HTMLMetaElement
-            const imageTwitterElement = document.querySelector('meta[name="twitter:image"]') as HTMLMetaElement
-            const imageTwitterSrcElement = document.querySelector('meta[name="twitter:image:src"]') as HTMLMetaElement
-            const descriptionTwitterElement = document.querySelector('meta[name="twitter:description"]') as HTMLMetaElement
+            const titleElement = document.querySelector(
+                'meta[property="og:title"]',
+            ) as HTMLMetaElement
+            const descriptionNameElement = document.querySelector(
+                'meta[name="description"]',
+            ) as HTMLMetaElement
+            const descriptionPropertyElement = document.querySelector(
+                'meta[property="og:description"]',
+            ) as HTMLMetaElement
+            const imageLinkElement = document.querySelector(
+                'link[rel="image_src"]',
+            ) as HTMLMetaElement
+            const imagePropertyElement = document.querySelector(
+                'meta[property="og:image"]',
+            ) as HTMLMetaElement
+            const imageTwitterElement = document.querySelector(
+                'meta[name="twitter:image"]',
+            ) as HTMLMetaElement
+            const imageTwitterSrcElement = document.querySelector(
+                'meta[name="twitter:image:src"]',
+            ) as HTMLMetaElement
+            const descriptionTwitterElement = document.querySelector(
+                'meta[name="twitter:description"]',
+            ) as HTMLMetaElement
 
             if (document) {
                 if (title && titleElement) {
                     document.title = `${title}`
                     titleElement.content = `${title}`
                 }
-                if (meta && descriptionNameElement && descriptionPropertyElement && descriptionTwitterElement) {
+                if (
+                    meta &&
+                    descriptionNameElement &&
+                    descriptionPropertyElement &&
+                    descriptionTwitterElement
+                ) {
                     descriptionNameElement.content = `${meta}`
                     descriptionPropertyElement.content = `${meta}`
                 }
-                if (shareImage && imageLinkElement && imagePropertyElement && imageTwitterElement && imageTwitterSrcElement) {
+                if (
+                    shareImage &&
+                    imageLinkElement &&
+                    imagePropertyElement &&
+                    imageTwitterElement &&
+                    imageTwitterSrcElement
+                ) {
                     imageLinkElement.content = `${shareImage}`
                     imagePropertyElement.content = `${shareImage}`
                     imageTwitterElement.content = `${shareImage}`

@@ -1,7 +1,9 @@
 //@import './vars/spaces';
 
 @function hsla-str($color) {
-    @return unquote('hsla(#{hue($color)/1deg}, #{saturation($color)}, #{lightness($color)}, #{alpha($color)})');
+    @return unquote(
+        'hsla(#{hue($color)/1deg}, #{saturation($color)}, #{lightness($color)}, #{alpha($color)})'
+    );
 }
 
 @function hsla-new($color, $options) {
@@ -16,7 +18,7 @@
         $newA: map-get($options, 'a');
     }
 
-    @return hsla(hue($color)/1deg, saturation($color), $newL, $newA);
+    @return hsla(hue($color) / 1deg, saturation($color), $newL, $newA);
 }
 
 @function toRem($size) {
@@ -36,7 +38,17 @@
         @error 'Value for `to-unit` should be a string.';
     }
 
-    $units: ('px': 1px, '%': 1%, 'ch': 1ch, 'em': 1em, 'rem': 1rem, 'vw': 1vw, 'vh': 1vh, 'vmin': 1vmin, 'vmax': 1vmax);
+    $units: (
+        'px': 1px,
+        '%': 1%,
+        'ch': 1ch,
+        'em': 1em,
+        'rem': 1rem,
+        'vw': 1vw,
+        'vh': 1vh,
+        'vmin': 1vmin,
+        'vmax': 1vmax,
+    );
     $parsed-unit: false;
 
     @each $unit in $units {

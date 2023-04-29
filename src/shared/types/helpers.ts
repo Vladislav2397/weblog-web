@@ -9,7 +9,13 @@ export type ViewPropsType =
     | 'secondary-outline'
     | 'flat'
 export type DisabledPropsType = boolean | ''
-export type TagPropsType = 'div' | 'a' | 'button' | 'label' | 'strong' | 'router-link'
+export type TagPropsType =
+    | 'div'
+    | 'a'
+    | 'button'
+    | 'label'
+    | 'strong'
+    | 'router-link'
 export type DirectionPropsType = 'row' | 'column'
 
 export type Maybe<T> = null | undefined | T

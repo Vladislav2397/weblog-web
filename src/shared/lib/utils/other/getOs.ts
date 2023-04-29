@@ -1,6 +1,6 @@
-import {Maybe} from "@/shared/types/helpers";
+import { Maybe } from '@/shared/types/helpers'
 
-export default function getOs(): Maybe<string>{
+export default function getOs(): Maybe<string> {
     let os: Maybe<string> = null
 
     if (typeof window !== 'undefined') {

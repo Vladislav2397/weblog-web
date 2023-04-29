@@ -1,0 +1,23 @@
+.article-card {
+    // max-width: 250px;
+
+    &__image {
+        max-width: 100%;
+        overflow: hidden;
+
+        img {
+            min-width: 100%;
+            width: 100%;
+            aspect-ratio: 4/3;
+        }
+    }
+
+    &__title {
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    &__description {
+        margin-top: 8px;
+    }
+}

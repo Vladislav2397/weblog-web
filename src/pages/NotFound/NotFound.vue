@@ -14,7 +14,7 @@ export default class NotFoundPage extends Vue {
 
     get buttonProps() {
         return {
-            size: this.$device.size.maxMobile ? 'm' : 'l'
+            size: this.$device.size.maxMobile ? 'm' : 'l',
         }
     }
 
