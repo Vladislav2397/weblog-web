@@ -1,0 +1,12 @@
+.DS_Store
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
+package-lock.json
+.idea
+*.iml
+src/**/*.js
+public/libs
+src/libs
+src/store

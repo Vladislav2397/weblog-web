@@ -1,0 +1,60 @@
+.not-found {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+
+    &__image {
+        height: toRem(150);
+
+        img {
+            height: 100%;
+        }
+    }
+
+    &__text {
+        @include fontSize(p1);
+
+        margin-left: auto;
+        margin-right: auto;
+
+        @include marginLevel(top, gray);
+        @include marginLevel(bottom, cobalt);
+
+        max-width: toRem(273);
+    }
+
+    &__wrapper {
+        margin-top: toRem(132);
+
+        @include marginLevel(bottom, beige);
+
+        text-align: center;
+    }
+
+    @media (min-width: $mobileBig) {
+        &__image {
+            height: toRem(180);
+        }
+    }
+
+    @include media-tablet {
+        &__wrapper {
+            margin-top: toRem(174);
+        }
+
+        &__image {
+            height: toRem(246);
+        }
+
+        &__text {
+            max-width: toRem(423);
+        }
+    }
+
+    @include media-desktop {
+        &__wrapper {
+            margin-top: toRem(188);
+        }
+    }
+}
