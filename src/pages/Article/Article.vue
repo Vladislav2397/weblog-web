@@ -1,11 +1,12 @@
 <template lang="pug">
 
 .b-article
-    .__container
-        h2 Article
-        .__title {{ article.title }}
+    page-layout(
+        v-if="article"
+        :title="article.title"
+    )
         .__description {{ article.description }}
-        .__content(
+        .__content.text(
             v-html="article.content"
         )
 
@@ -13,19 +14,42 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import { PageLayout } from '@/widgets/ui/PageLayout'
 
 export type ArticleProps = {
     //
 }
 
-@Component
+@Component({
+    components: {
+        'page-layout': PageLayout,
+    }
+})
 export default class Article extends Vue {
+    // get article() {
+    //     return {
+    //         title: 'Article title',
+    //         description: 'description',
+    //         content: '<p>Content</p>',
+    //     }
+    // }
+
+    async fetchArticle() {
+        await this.$store.dispatch('articles/fetchItem', this.$route.params.id)
+    }
+
     get article() {
-        return {
-            title: 'title',
-            description: 'description',
-            content: '<p>Content</p>',
-        }
+        return this.$store.getters?.['articles/active']
+    }
+
+    beforeMount() {
+        if (this.article) return
+
+        this.fetchArticle()
+    }
+
+    async serverPrefetch() {
+        await this.fetchArticle()
     }
 }
 </script>

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex, { type Store, type StoreOptions } from 'vuex'
-import { getArticles } from '@/shared/api'
+import { getArticle, getArticles } from '@/shared/api'
 
 Vue.use(Vuex)
 
@@ -12,16 +12,23 @@ const store: StoreOptions<StateRoot> = {
             namespaced: true,
             state: () => ({
                 list: [],
+                active: null
             }),
             getters: {
                 list(state) {
                     return state.list
                 },
+                active(state) {
+                    return state.active
+                }
             },
             mutations: {
                 updateList(state, list) {
                     state.list = list
                 },
+                updateActive(state, active) {
+                    state.active = active
+                }
             },
             actions: {
                 async fetch({ commit }) {
@@ -30,6 +37,11 @@ const store: StoreOptions<StateRoot> = {
                     console.log('response', data)
                     commit('updateList', data)
                 },
+                async fetchItem({ commit }, id) {
+                    const { article } = await getArticle(id)
+
+                    commit('updateActive', article)
+                }
             },
         },
     },
