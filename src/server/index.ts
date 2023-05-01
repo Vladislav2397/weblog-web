@@ -68,6 +68,9 @@ createServer({
             description() {
                 return faker.lorem.lines(2)
             },
+            content() {
+                return faker.lorem.paragraphs(5)
+            },
             date() {
                 return new Date(`2022-04-${randint(1, 25)}`)
             },

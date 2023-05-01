@@ -1,5 +1,6 @@
 import type { RouteConfig } from 'vue-router'
 import Home from '@/pages/Home/Home.vue'
+import Article from '@/pages/Article/Article.vue'
 
 const routes: RouteConfig[] = [
     {
@@ -15,7 +16,7 @@ const routes: RouteConfig[] = [
     {
         path: '/articles/:id',
         name: 'Article',
-        component: () => import('@/pages/Article/Article.vue'),
+        component: Article,
     },
     {
         path: 'not-found',

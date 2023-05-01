@@ -18,7 +18,7 @@ export type TagPropsType =
     | 'router-link'
 export type DirectionPropsType = 'row' | 'column'
 
-export type Maybe<T> = null | undefined | T
+// export type Maybe<T> = null | undefined | T
 export type IconName =
     | 'placeholder'
     | 'plus'

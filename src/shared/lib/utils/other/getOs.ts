@@ -1,4 +1,4 @@
-import { Maybe } from '@/shared/types/helpers'
+declare type Maybe<T> = T | null
 
 export default function getOs(): Maybe<string> {
     let os: Maybe<string> = null

@@ -12,9 +12,12 @@
         "noImplicitAny": false,
         "importHelpers": true,
 
+        "types": ["node", "globals"],
+        "typeRoots": ["./node_modules/@types", "./src"],
+
         "baseUrl": "./",
         "paths": {
-            "@/*": ["src/*"]
+            "@/*": ["./src/*"]
         }
     },
     "exclude": ["*.js"]

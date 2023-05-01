@@ -32,10 +32,15 @@ const store: StoreOptions<StateRoot> = {
             },
             actions: {
                 async fetch({ commit }) {
-                    const { data } = await getArticles()
+                    try {
+                        const { data } = await getArticles()
 
-                    console.log('response', data)
-                    commit('updateList', data)
+                        console.log('response', data)
+                        commit('updateList', data)
+                    } catch (error) {
+                        console.log('fail fetch getArticles')
+                        console.error(error)
+                    }
                 },
                 async fetchItem({ commit }, id) {
                     const { article } = await getArticle(id)

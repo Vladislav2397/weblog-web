@@ -1,4 +1,8 @@
-import fetch from 'unfetch'
+// import axios from 'axios'
+// import unfetch from 'unfetch'
+// eslint-disable-next-line import/no-extraneous-dependencies
+// import ky from 'ky-universal'
+import fetch from 'isomorphic-fetch'
 
 type RequestOptions = {
     url: string
@@ -8,19 +12,12 @@ type RequestOptions = {
 
 // TODO: Realize makeRequest
 export const makeRequest = <T extends unknown>(
-    { url, method = 'GET', data }: RequestOptions,
-    response?,
+    { url, method = 'GET', data }: RequestOptions
 ): Promise<T> =>
     new Promise((resolve, reject) => {
-        fetch(`http://localhost:8000/api${url}`, {
-            method,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
+        fetch(`http://localhost:8000/api${url}`)
             .then(r => {
                 resolve(r.json())
             })
-            .catch(() => reject())
+            .catch(reject)
     })

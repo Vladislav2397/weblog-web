@@ -3,16 +3,19 @@ import createApp from './app'
 import '../../public/libs/scrollLockPoly'
 import cssVars from 'css-vars-ponyfill'
 
-import './../../public/libs/requestAnimationFramePolyfill'
-import './../../public/libs/polyfill-promise-find-findIndex-isNan'
+// import './../../public/libs/requestAnimationFramePolyfill'
+// import './../../public/libs/polyfill-promise-find-findIndex-isNan'
 
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
     beforeRouteUpdate(to, from, next) {
+        console.log('this.$options', this.$options)
         const { asyncData } = this.$options
+
         if (asyncData) {
             asyncData({
                 store: this.$store,
+                router: this.$router,
                 route: to,
             })
                 .then(next)
@@ -39,15 +42,27 @@ router.onReady(() => {
         const activated = matched.filter((c, i) => {
             return diffed || (diffed = prevMatched[i] !== c)
         })
-        const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _)
+
+        console.log('before resolve router', activated)
+        const asyncDataHooks = activated
+            .map(c => {
+                // console.log('store', store)
+                // console.log('component', c)
+
+                return c.options?.methods?.asyncData
+            })
+            .filter(_ => _)
+        console.log('asyncDataHooks', asyncDataHooks)
         if (!asyncDataHooks.length) {
             return next()
         }
 
-        bar.start()
-        Promise.all(asyncDataHooks.map(hook => hook({ store, route: to })))
+        // bar.start()
+        Promise.all(
+            asyncDataHooks.map(hook => hook({ store, route: to, router })),
+        )
             .then(() => {
-                bar.finish()
+                // bar.finish()
                 next()
             })
             .catch(next)

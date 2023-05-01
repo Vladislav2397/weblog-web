@@ -166,10 +166,12 @@ function render(req, res) {
 
     renderer.renderToString(context, (err, html) => {
         if (err) {
+            console.log('handle error')
             return handleError(err)
         }
 
         res.send(html)
+        // console.log('html sended', html)
         if (!isProd) {
             console.log(`whole request: ${Date.now() - s}ms`)
         }

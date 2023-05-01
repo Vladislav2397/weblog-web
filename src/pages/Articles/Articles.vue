@@ -23,26 +23,21 @@ export type ArticlesProps = {
 @Component({
     components: {
         'article-card': ArticleCard,
-    }
+    },
 })
 export default class Articles extends Vue {
-    async fetchArticles() {
-        await this.$store.dispatch('articles/fetch')
-    }
-
     get articles() {
         return this.$store.getters?.['articles/list'] ?? []
     }
 
-    beforeMount() {
-        if (this.articles.length) return
-
-        this.fetchArticles()
-    }
-
-    async serverPrefetch() {
-        // @ts-ignore
-        await this.fetchArticles()
+    async asyncData({ store }) {
+        // await getArticles()
+        try {
+            await store.dispatch('articles/fetch')
+        } catch (error) {
+            console.log('fail article fetch')
+            console.log('error', error)
+        }
     }
 }
 </script>

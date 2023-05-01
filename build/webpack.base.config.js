@@ -110,22 +110,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: isProd
-                    ? [
-                          MiniCssExtractPlugin.loader,
-                          'css-loader',
-                          // {
-                          //     loader: 'postcss-loader',
-                          //     options: {
-                          //         sourceMap: true,
-                          //         config: {
-                          //             path: `./build/postcss.config.js`
-                          //         }
-                          //     }
-                          // },
-                          'sass-loader',
-                      ]
-                    : ['vue-style-loader', 'css-loader', 'sass-loader'],
+                use: ['vue-style-loader', 'css-loader', 'sass-loader'],
             },
             {
                 test: /\.pug$/,

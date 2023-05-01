@@ -6,4 +6,13 @@
     align-items: center;
     padding: 0 16px;
     background-color: #ccc;
+
+    &__logo {
+        text-transform: uppercase;
+        font-size: 32px;
+        font-weight: 900;
+        text-decoration: none;
+        font-family: sans-serif;
+        color: #000;
+    }
 }

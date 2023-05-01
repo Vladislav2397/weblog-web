@@ -5,6 +5,11 @@
         v-if="article"
         :title="article.title"
     )
+        .__image
+            img(
+                :src="article.image.src"
+                :alt="article.image.alt"
+            )
         .__description {{ article.description }}
         .__content.text(
             v-html="article.content"
@@ -23,36 +28,21 @@ export type ArticleProps = {
 @Component({
     components: {
         'page-layout': PageLayout,
-    }
+    },
 })
 export default class Article extends Vue {
-    // get article() {
-    //     return {
-    //         title: 'Article title',
-    //         description: 'description',
-    //         content: '<p>Content</p>',
-    //     }
-    // }
-
-    async fetchArticle() {
-        await this.$store.dispatch('articles/fetchItem', this.$route.params.id)
-    }
-
     get article() {
         return this.$store.getters?.['articles/active']
     }
 
-    beforeMount() {
-        if (this.article) return
+    async asyncData({ route, store }) {
+        const { id } = route.params
+        console.log('call async data', store._actions)
 
-        this.fetchArticle()
-    }
-
-    async serverPrefetch() {
-        await this.fetchArticle()
+        return Promise.all([store.dispatch('articles/fetchItem', id)])
     }
 }
 </script>
 
-<!-- <style lang="scss" src="./Article.critical.scss" /> -->
+<style lang="scss" src="./Article.critical.scss" />
 <!-- <style lang="scss" src="./Article.main.scss" /> -->
