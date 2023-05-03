@@ -149,6 +149,8 @@ function render(req, res) {
     res.setHeader('Content-Type', 'text/html')
     res.setHeader('Server', serverInfo)
     const handleError = err => {
+        console.error(err)
+
         if (err.url) {
             res.redirect(err.url)
         } else if (err.code === 404) {
@@ -166,7 +168,7 @@ function render(req, res) {
 
     renderer.renderToString(context, (err, html) => {
         if (err) {
-            console.log('handle error')
+            console.log('handleError(err)', html)
             return handleError(err)
         }
 

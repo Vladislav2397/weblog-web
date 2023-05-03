@@ -43,23 +43,32 @@ router.onReady(() => {
             return diffed || (diffed = prevMatched[i] !== c)
         })
 
-        console.log('before resolve router', activated)
         const asyncDataHooks = activated
             .map(c => {
                 // console.log('store', store)
-                // console.log('component', c)
+                console.log(
+                    'client method async data',
+                    c.options?.methods?.asyncData,
+                )
 
                 return c.options?.methods?.asyncData
             })
             .filter(_ => _)
-        console.log('asyncDataHooks', asyncDataHooks)
         if (!asyncDataHooks.length) {
             return next()
         }
 
         // bar.start()
         Promise.all(
-            asyncDataHooks.map(hook => hook({ store, route: to, router })),
+            asyncDataHooks.map(hook => {
+                return hook({ store, route: to, router })
+                    .then(() => {
+                        console.log('client resolve async data hook')
+                    })
+                    .catch(() => {
+                        console.log('client reject async data hook')
+                    })
+            }),
         )
             .then(() => {
                 // bar.finish()

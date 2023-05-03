@@ -14,7 +14,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { ArticleCard } from '@/entities/article/ui/ArticleCard'
-// import { getArticles } from '@/shared/api'
 
 export type ArticlesProps = {
     //
@@ -31,7 +30,8 @@ export default class Articles extends Vue {
     }
 
     async asyncData({ store }) {
-        // await getArticles()
+        console.log('Articles.vue calling async data')
+
         try {
             await store.dispatch('articles/fetch')
         } catch (error) {

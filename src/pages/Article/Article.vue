@@ -36,10 +36,10 @@ export default class Article extends Vue {
     }
 
     async asyncData({ route, store }) {
+        console.log('Article.vue call async data')
         const { id } = route.params
-        console.log('call async data', store._actions)
 
-        return Promise.all([store.dispatch('articles/fetchItem', id)])
+        await store.dispatch('articles/fetchItem', id)
     }
 }
 </script>

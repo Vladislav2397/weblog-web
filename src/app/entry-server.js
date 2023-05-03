@@ -36,13 +36,24 @@ export default context =>
             // updated.
             Promise.all(
                 matchedComponents.map(component => {
+                    console.log(
+                        'server method async data',
+                        component.sealedOptions?.methods?.asyncData,
+                    )
                     return (
                         component.sealedOptions?.methods?.asyncData &&
-                        component.sealedOptions.methods.asyncData({
-                            store,
-                            router,
-                            route: router.currentRoute,
-                        })
+                        component.sealedOptions.methods
+                            .asyncData({
+                                store,
+                                router,
+                                route: router.currentRoute,
+                            })
+                            .then(() => {
+                                console.log('server resolve async data hook')
+                            })
+                            .catch(() => {
+                                console.log('server reject async data hook')
+                            })
                     )
                 }),
                 // matchedComponents.map(({ asyncData }) => {

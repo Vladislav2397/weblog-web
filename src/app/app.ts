@@ -10,9 +10,6 @@ import App from './App.vue'
 import createRouter from './providers/router'
 import createStore from './providers/store'
 
-// import '../server'
-import '../server/handlers'
-
 const scrollLock = () =>
     import(
         /* webpackChunkName: "chunks/utils/scroll-lock" */
@@ -28,7 +25,6 @@ Vue.prototype.$os = getOs()
 export default function createApp() {
     const router = createRouter()
     const store = createStore()
-
 
     const app = new Vue({
         name: 'App',

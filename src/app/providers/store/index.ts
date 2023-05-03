@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex, { type Store, type StoreOptions } from 'vuex'
-import { getArticle, getArticles } from '@/shared/api'
+import { articleApi } from '@/shared/api/articles'
 
 Vue.use(Vuex)
 
@@ -33,9 +33,8 @@ const store: StoreOptions<StateRoot> = {
             actions: {
                 async fetch({ commit }) {
                     try {
-                        const { data } = await getArticles()
+                        const { articles: { data } } = await articleApi.getArticles()
 
-                        console.log('response', data)
                         commit('updateList', data)
                     } catch (error) {
                         console.log('fail fetch getArticles')
@@ -43,7 +42,7 @@ const store: StoreOptions<StateRoot> = {
                     }
                 },
                 async fetchItem({ commit }, id) {
-                    const { article } = await getArticle(id)
+                    const { article } = await articleApi.getArticle(id)
 
                     commit('updateActive', article)
                 }
