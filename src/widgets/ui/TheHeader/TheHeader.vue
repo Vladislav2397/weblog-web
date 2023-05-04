@@ -6,6 +6,7 @@
     ) WebLog
     .__links
         router-link.__item(
+            tag="a"
             to="/articles"
         ) Blog
 

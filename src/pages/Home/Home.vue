@@ -2,8 +2,9 @@
 
 .home-page
     page-layout(
-        title="Home page"
+        title="WebLog"
     )
+        p Тестовый сайт статьи созданный для выражения знаний и умений на деле
 
 </template>
 

@@ -28,7 +28,10 @@ const articles = new Map([
             src: 'path/to/src',
             alt: 'alt'
         },
-        content: '<p>some content for article</p>',
+        content: `## Hello world
+        ### first article
+        This is a **first article** on this site and I'm glad to see you.
+        Article will write to markdown syntax`,
     }],
     ['2', {
         id: 2,

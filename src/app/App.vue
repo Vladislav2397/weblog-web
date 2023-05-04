@@ -23,6 +23,17 @@ export default class Root extends Vue {
 <style lang="scss">
 @import './styles/utility/reset.scss';
 
+html {
+    font-family: sans-serif;
+}
+
+a,
+a:visited {
+    color: #000;
+    font-size: 16px;
+    line-height: 20px;
+}
+
 h1 {
     font-size: 24px;
     font-weight: bold;
