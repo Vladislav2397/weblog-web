@@ -1,4 +1,11 @@
 .article {
+    &__image {
+        margin-bottom: 8px;
+        aspect-ratio: 16 / 9;
+        background-color: #ccc;
+        border-radius: 4px;
+    }
+
     &__description {
         margin-bottom: 8px;
     }

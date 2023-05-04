@@ -1,8 +1,9 @@
 <template lang="pug">
 
 .b-articles
-    .__container
-        h2.__title Articles
+    page-layout(
+        title="Articles"
+    )
         .__list
             article-card.__item(
                 v-for="article in articles"
@@ -14,6 +15,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { ArticleCard } from '@/entities/article/ui/ArticleCard'
+import { PageLayout } from '@/widgets/ui/PageLayout'
 
 export type ArticlesProps = {
     //
@@ -21,6 +23,7 @@ export type ArticlesProps = {
 
 @Component({
     components: {
+        'page-layout': PageLayout,
         'article-card': ArticleCard,
     },
 })

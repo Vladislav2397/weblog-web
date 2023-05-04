@@ -1,17 +1,23 @@
 .articles {
-    padding-top: 24px;
-
-    &__container {
-        padding: 0 16px;
-    }
-
     &__list {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1fr;
         grid-gap: 16px;
     }
 
     &__title {
         margin-bottom: 24px;
+    }
+
+    @media (min-width: 550px) {
+        &__list {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 768px) {
+        &__list {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 }
