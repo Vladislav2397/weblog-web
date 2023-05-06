@@ -1,8 +1,29 @@
 {
     "name": "weblog",
-    "description": "weblog",
+    "description": "WebLog - Example website for test skils",
     "author": " Vladislav",
+    "contributors": [
+        {
+            "email": "valdiszz53@gmail.com",
+            "name": "Vladislav",
+            "url": "https://github.com/Vladislav2397"
+        }
+    ],
+    "displayName": "WebLog",
+    "categories": [
+        "Education",
+        "Other"
+    ],
+    "keywords": [
+        "WebLog",
+        "skils",
+        "example",
+        "vue ssr"
+    ],
     "private": true,
+    "version": "0.1.0",
+    "main": "server.js",
+    "license": "ISC",
     "scripts": {
         "dev": "node server --host 0.0.0.0 --allowed-hosts 192.168.1.46",
         "start": "cross-env NODE_ENV=production node server",
@@ -172,8 +193,5 @@
     },
     "sideEffects": [
         ".scss"
-    ],
-    "version": "1.0.0",
-    "main": "server.js",
-    "license": "ISC"
+    ]
 }
