@@ -10,6 +10,8 @@
             img(
                 :src="article.image.src"
                 :alt="article.image.alt"
+                :width="imageSize[0]"
+                :height="imageSize[1]"
             )
         .__description {{ article.description }}
         .__content.text(
@@ -20,8 +22,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { markdown } from 'markdown'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import MarkdownIt from 'markdown-it'
 import { PageLayout } from '@/widgets/ui/PageLayout'
@@ -40,6 +40,11 @@ export default class Article extends Vue {
         return this.$store.getters?.['articles/active']
     }
 
+    get imageSize() {
+        if (this.$device.size.maxMobile) return ['320', '240']
+        return ['650', '420']
+    }
+
     get content() {
         const article = this.activeArticle
 
@@ -55,22 +60,13 @@ export default class Article extends Vue {
 
         const md = new MarkdownIt()
 
-        console.log('article', article)
-
         return {
             ...article,
             content: md.render(this.content),
         }
     }
 
-    created() {
-        const md = new MarkdownIt()
-
-        console.log('markdown', md.render('## Hello world\n### And thrid'))
-    }
-
     async asyncData({ route, store }) {
-        console.log('Article.vue call async data')
         const { id } = route.params
 
         await store.dispatch('articles/fetchItem', id)

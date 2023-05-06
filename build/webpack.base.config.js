@@ -156,16 +156,12 @@ module.exports = {
         ],
         splitChunks: {
             chunks: 'all',
-            cacheGroups: {
-                vueGroup: {
-                    test: /[\\/]node_modules[\\/](vue|es6-promise)[\\/]/,
-                    chunks: 'all',
-                },
-                commons: {
-                    test: /[\\/]node_modules[\\/]/,
-                    chunks: 'all',
-                },
-            },
+            // cacheGroups: {
+            //     vueGroup: {
+            //         test: /[\\/]node_modules[\\/](vue|vue-router|vuex|es6-promise)[\\/]/,
+            //         chunks: 'all',
+            //     },
+            // },
         },
     },
     plugins,

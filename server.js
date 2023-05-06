@@ -134,12 +134,12 @@ function render(req, res) {
 
     const context = {
         req,
-        title: '',
+        title: 'WebLog',
         device: req.device.type.toLowerCase(),
         url: req.url,
         meta: '',
         shareImage: '',
-        language: req.url.split('/')[1],
+        language: 'ru',
         production: isProd,
         htmlClass: htmlClasses.join(' '),
         domain,
@@ -168,7 +168,6 @@ function render(req, res) {
 
     renderer.renderToString(context, (err, html) => {
         if (err) {
-            console.log('handleError(err)', html)
             return handleError(err)
         }
 

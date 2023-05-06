@@ -1,10 +1,10 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { TCoords } from 'animated-scroll-to'
-import { Maybe } from '@/shared/types/helpers'
+import { Maybe } from '@/globals'
 
 const animateScrollTo = () =>
     import(
-        /* webpackMode: "lazy", webpackPreload: true, webpackChunkName: "chunks/libs/animated-scroll-to" */
+        /* webpackMode: "lazy", webpackPreload: true, webpackChunkName: "chunks/animated-scroll-to" */
         'animated-scroll-to'
     )
 

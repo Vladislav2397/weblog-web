@@ -9,7 +9,6 @@ import cssVars from 'css-vars-ponyfill'
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
     beforeRouteUpdate(to, from, next) {
-        console.log('this.$options', this.$options)
         const { asyncData } = this.$options
 
         if (asyncData) {
@@ -45,12 +44,6 @@ router.onReady(() => {
 
         const asyncDataHooks = activated
             .map(c => {
-                // console.log('store', store)
-                console.log(
-                    'client method async data',
-                    c.options?.methods?.asyncData,
-                )
-
                 return c.options?.methods?.asyncData
             })
             .filter(_ => _)
@@ -62,12 +55,6 @@ router.onReady(() => {
         Promise.all(
             asyncDataHooks.map(hook => {
                 return hook({ store, route: to, router })
-                    .then(() => {
-                        console.log('client resolve async data hook')
-                    })
-                    .catch(() => {
-                        console.log('client reject async data hook')
-                    })
             }),
         )
             .then(() => {

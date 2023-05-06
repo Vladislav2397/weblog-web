@@ -37,7 +37,6 @@ const store: StoreOptions<StateRoot> = {
 
                         commit('updateList', data)
                     } catch (error) {
-                        console.log('fail fetch getArticles')
                         console.error(error)
                     }
                 },

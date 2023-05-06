@@ -4,6 +4,11 @@
         aspect-ratio: 16 / 9;
         background-color: #ccc;
         border-radius: 4px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+        }
     }
 
     &__description {

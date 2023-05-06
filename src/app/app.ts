@@ -12,7 +12,7 @@ import createStore from './providers/store'
 
 const scrollLock = () =>
     import(
-        /* webpackChunkName: "chunks/utils/scroll-lock" */
+        /* webpackChunkName: "chunks/scroll-lock" */
         'scroll-lock'
     )
 
@@ -21,6 +21,15 @@ scrollLock().then(response => {
 })
 
 Vue.prototype.$os = getOs()
+
+Vue.mixin({
+    inject: {
+        $device: {
+            default: { size: { desktop: false, tablet: false, maxMobile: true } },
+            from: '$device',
+        }
+    }
+})
 
 export default function createApp() {
     const router = createRouter()

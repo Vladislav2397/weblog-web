@@ -25,7 +25,7 @@ const articles = new Map([
         title: 'title 1',
         description: 'description',
         image: {
-            src: 'path/to/src',
+            src: 'https://loremflickr.com/650/480/abstract',
             alt: 'alt'
         },
         content: `## Hello world
@@ -38,19 +38,20 @@ const articles = new Map([
         title: 'title 2',
         description: 'description',
         image: {
-            src: 'path/to/src',
+            src: 'https://loremflickr.com/650/480/abstract',
             alt: 'alt'
         },
-        content: '<p>some content for article</p>',
+        content: `## Hello world
+        Article will write to markdown syntax`,
     }],
     ['3', {
         id: 3,
         title: 'title 3',
         description: 'description',
         image: {
-            src: 'path/to/src',
+            src: 'https://loremflickr.com/650/480/abstract',
             alt: 'alt'
         },
-        content: '<p>some content for article</p>',
+        content: `Lorem ipsum some dslgj fdslkgsdgl\n D gfkjdgslsdg gdlfgjdfsglksdg\n dsflgkjsdgj ldgksdglgj sdgdldg glfsgjslgfdsg sdfgdsfgldslgfdgks fgdfgjkdsg`,
     }]
 ])

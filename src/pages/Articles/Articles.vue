@@ -33,13 +33,10 @@ export default class Articles extends Vue {
     }
 
     async asyncData({ store }) {
-        console.log('Articles.vue calling async data')
-
         try {
             await store.dispatch('articles/fetch')
         } catch (error) {
-            console.log('fail article fetch')
-            console.log('error', error)
+            console.error(error)
         }
     }
 }

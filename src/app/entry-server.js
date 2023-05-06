@@ -28,32 +28,19 @@ export default context =>
                 return reject({ code: 404 })
             }
 
-            console.log('route', router.currentRoute.path)
-
             // Call fetchData hooks on components matched by the route.
             // A preFetch hook dispatches a store action and returns a Promise,
             // which is resolved when the action is complete and store state has been
             // updated.
             Promise.all(
                 matchedComponents.map(component => {
-                    console.log(
-                        'server method async data',
-                        component.sealedOptions?.methods?.asyncData,
-                    )
                     return (
                         component.sealedOptions?.methods?.asyncData &&
-                        component.sealedOptions.methods
-                            .asyncData({
-                                store,
-                                router,
-                                route: router.currentRoute,
-                            })
-                            .then(() => {
-                                console.log('server resolve async data hook')
-                            })
-                            .catch(() => {
-                                console.log('server reject async data hook')
-                            })
+                        component.sealedOptions.methods.asyncData({
+                            store,
+                            router,
+                            route: router.currentRoute,
+                        })
                     )
                 }),
                 // matchedComponents.map(({ asyncData }) => {

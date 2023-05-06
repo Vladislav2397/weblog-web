@@ -7,6 +7,8 @@
         img(
             :src="article.image.src"
             :alt="article.image.alt"
+            :width="imageSize[0]"
+            :height="imageSize[1]"
         )
     .__title {{ article.title }}
     .__description {{ article.description }}
@@ -21,9 +23,15 @@ export type ArticleCardProps = Pick<ArticleCard, 'article'>
 
 @Component
 export default class ArticleCard extends Vue {
-    @Prop() readonly article!: Pick<Article,
+    @Prop() readonly article!: Pick<
+        Article,
+        'id' | 'image' | 'title' | 'description'
+    >
 
-        'id' | 'image' | 'title' | 'description'>
+    get imageSize() {
+        if (this.$device.size.maxMobile) return ['320', '240']
+        return ['650', '420']
+    }
 
     onClick() {
         this.$router.push(`/articles/${this.article.id}`)
