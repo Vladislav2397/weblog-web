@@ -1,5 +1,11 @@
-const domain = 'weblog.ru'
+const domain = 'weblog-c5d09.web.app'
 /* eslint-disable */
+
+require('dotenv').config()
+
+if (!process.env.FIREBASE_API_KEY) {
+    throw new Error('firebase was not initialized')
+}
 
 const fs = require('fs')
 const path = require('path')
@@ -20,7 +26,7 @@ const serverInfo =
     `vue-server-renderer/${require('vue-server-renderer/package.json').version}`
 
 const app = express()
-app.use(cors({ origin: 'https://weblog.ru' }))
+app.use(cors({ origin: `https://${domain}` }))
 
 app.use(
     session({
